@@ -71,7 +71,8 @@
   while($row = $result->fetch_assoc()){
     array_push($usernames, $row["oculus_name"]);
   }
-
+  $ini_array = parse_ini_file("config.ini");
+  
 
 ?>
 <title><?php echo ucfirst($username) ?>'s User page</title>
@@ -386,7 +387,7 @@
         CURLOPT_HTTPHEADER,
         array(
           "User-Agent:EchoCombatRanked/2.15 ECRanked.com/2.4",
-          "Authorization:Bot ODUyNjYwODI2NzEwOTk5MDUx.YMKERg.yW0azJLkVQoXrUWD1gL0LxvVn6Y",
+          "Authorization:Bot ".$ini_array['bot_token'],
         )
       );
 
