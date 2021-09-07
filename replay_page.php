@@ -42,7 +42,6 @@
   }
   
   $ip = $_SERVER['REMOTE_ADDR'];
-  echo $ip;
   if($ip == "::1" or $ip == "192.168.1.1"){
     $timezone = "BST";
   } else{
@@ -60,7 +59,7 @@
 
 
 ?>
-<title><?php echo $session_id?></title>
+<title><?php echo htmlspecialchars($session_id, ENT_QUOTES, 'UTF-8')?></title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/style.css">

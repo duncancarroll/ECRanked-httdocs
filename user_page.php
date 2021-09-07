@@ -56,7 +56,6 @@
     return $out;
   }
   $ip = $_SERVER['REMOTE_ADDR'];
-  echo $ip;
   if($ip == "::1" or $ip == "192.168.1.1"){
     $timezone = "BST";
   } else{
@@ -75,7 +74,7 @@
   
 
 ?>
-<title><?php echo ucfirst($username) ?>'s User page</title>
+<title><?php echo htmlspecialchars(ucfirst($username), ENT_QUOTES, 'UTF-8') ?>'s User page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/style.css">
@@ -396,7 +395,6 @@
 
       $response = curl_exec($curl_h);
       $jsonData = json_decode($response);
-      #echo $jsonData->{'avatar'};
       $discordAvatarLink = "https://cdn.discordapp.com/avatars/" . $discordID . "/" . $jsonData->{'avatar'} . ".png";
       $discordFullName = $jsonData->{'username'} . "#" . $jsonData->{'discriminator'};
       echo <<<EOT

@@ -113,7 +113,7 @@ if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit")) {
 #echo $fileurl;
 
 if ($NewUser){
-    $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',10);");
+    $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',600);");
 } else{
     $result = mysqli_query($mysqli, "UPDATE rate_limit SET `last_access` = '".$_AccessTime."',`timeout` = 60 WHERE (`ip` = '".$_Ip."')");
 }
