@@ -1,0 +1,29 @@
+<Files "config.ini">
+Order Allow,Deny
+Deny from all
+</Files>
+
+RewriteEngine On
+
+RedirectMatch "^/user$" "/"
+RedirectMatch "^/home$" "/"
+RedirectMatch "^/users$" "/"
+
+RewriteRule ^about$ /about.html [PT]
+
+RewriteRule ^takedown$ /takedown.html [PT]
+RewriteRule ^user/([^\/]*)$ user_page.php?username=$1 [PT]
+
+RewriteRule ^replay/([^\/]*)/download$ api/get_replay.php?session_id=$1 [PT]
+
+RewriteRule ^replay/([^\/]*)$ replay_page.php?session_id=$1 [PT]
+
+RewriteRule ^user/([^\/]*)/stats$ user_page.php?username=$1 [PT]
+RewriteRule ^user/([^\/]*)/stats.json /api/get_stats.py?username=$1 [PT]
+
+
+
+RewriteRule ^pubs$ api/pub_count.py [PT]
+
+AddHandler cgi-script .cgi .pl .asp .py .php
+
