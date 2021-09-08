@@ -139,11 +139,12 @@ print("print 132")
 
 
 startTime   =  datetime.strptime(data["start_time"].replace("/","-"),"%Y-%m-%d %H:%M:%S") #
+FormatedStartTime = datetime.strftime(startTime,"%Y-%m-%d %H-%M-%S")
 print("print 136")
 
 totalFrames = data["frames"]
 mapName     = data["map"]
-replayLink  = f"E:/ECRanked/Replays/{mapName}/[{startTime}] {sessionID}"
+replayLink  = data["replay_link"]
 
 playerIDs   = []
 

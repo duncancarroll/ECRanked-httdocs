@@ -181,7 +181,7 @@
 
   <!-- Header -->
   <header class="w3-container w3-black w3-center" style="padding:100px 5px;background-image: url('/assets/combat_background.jpg'); background-size: cover;">
-    <h1 class="w3-margin w3-xlarge" style="font-size:10px"><?php echo $session_id?></h1>
+    <h1 class="w3-margin w3-xlarge" style="font-size:10px"><?php echo htmlspecialchars($session_id,ENT_QUOTES, 'UTF-8')?></h1>
   </header>
   <?php
 
@@ -227,85 +227,10 @@
 
     ?>
     <div class="user-stats">
-      <header><h1 style="text-align:center">Stats<h1></header>
+      <header><h1 style="text-align:center">About Game<h1></header>
       <header class="stats-grid" style="padding:auto;text-align:center">
 
-        <div class="stat-container">
-          Total Games
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $total_games_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($total_games) ?>
-            </p>
-
-          </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Total Deaths
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $total_deaths_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($total_deaths) ?>
-            </p>
-
-          </div>
-        </div>
-        <div class="stat-container">
-          Average Ping
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $average_ping_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($average_ping, 1) ?>ms
-            </p>
-
-          </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Average Speed
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $average_speed_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($average_speed, 2) ?>m/s
-            </p>
-
-          </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Time stopped
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $percent_stopped_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($percent_stopped) ?>%
-            </p>
-
-          </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Inverted
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $percent_upsidedown_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($percent_upsidedown) ?>%
-            </p>
-
-          </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Deaths / game
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $deaths_per_game_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($deaths_per_game, 1) ?>
-            </p>
-
-          </div>
-          </p>
-        </div>
+        
 
       </header>
 

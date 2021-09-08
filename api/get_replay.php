@@ -4,7 +4,7 @@ $username = "root";
 
 // Create connection
 $mysqli = new mysqli("localhost","root","","ecranked");
-$fileurl = 'E:\ECRanked\Replays\combustion\[2021-08-14 21-37-52] B475B4E6-A3A6-428D-A5F0-EC9DC5673611.echoreplay';
+$fileurl = 'E:\ECRanked\Replays\combustion\[2021-08-24 00-28-17] E4C21CFD-1123-4F24-B47A-3241CD4CEBDA.echoreplay';
 
 
 $NewUser = false;
@@ -14,7 +14,7 @@ if ($mysqli -> connect_errno) {
   }
 $_Ip = $_SERVER["REMOTE_ADDR"];
 $_AccessTime = date("Y-m-d H:i:s");
-if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit")) {
+if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit WHERE `ip` = '".$_Ip."'")) {
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 
@@ -69,6 +69,10 @@ $result = $stmt->get_result();
 
 while($row = $result->fetch_assoc()) {
     $fileurl = $row["replay_link"];
+    $fileurl = str_replace("/", "\\", $fileurl);
+    // $fileurl = str_replace("E:\\", "\\\\192.168.1.166\\ECRanked\\", $fileurl);
+    #$fileurl = str_replace("E:\\", "C:\\", $fileurl);
+
 }
 
 
@@ -80,7 +84,7 @@ $_Ip = $_SERVER["REMOTE_ADDR"];
 $_AccessTime = date("Y-m-d H:i:s");
 
 
-if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit")) {
+if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit WHERE `ip` = '".$_Ip."'")) {
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 
@@ -105,7 +109,7 @@ if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit")) {
     } else{
         mysqli_free_result($result);
 
-        $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',60);");
+        $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',5);");
     }
 }
 
@@ -113,14 +117,22 @@ if ($result = mysqli_query($mysqli, "SELECT * FROM rate_limit")) {
 #echo $fileurl;
 
 if ($NewUser){
-    $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',600);");
+    $result = mysqli_query($mysqli, "INSERT INTO rate_limit (`ip`, `last_access`,`timeout`) VALUES ('".$_Ip."', '".$_AccessTime."',5);");
 } else{
-    $result = mysqli_query($mysqli, "UPDATE rate_limit SET `last_access` = '".$_AccessTime."',`timeout` = 60 WHERE (`ip` = '".$_Ip."')");
+    $result = mysqli_query($mysqli, "UPDATE rate_limit SET `last_access` = '".$_AccessTime."',`timeout` = 5 WHERE (`ip` = '".$_Ip."')");
 }
-
+$ini_array = parse_ini_file("config.ini");
+#print_r($ini_array['api_key']);
+echo shell_exec('python "copy_file.py" '.$ini_array['api_key'].' "'.$fileurl.'" "'.$_GET["session_id"].'.echoreplay"');
 header("Content-type:application/pdf");
 header('Content-Disposition: attachment; filename=' . $_GET["session_id"].".echoreplay");
-readfile( $fileurl );
+readfile($_GET["session_id"].".echoreplay");
+#shell_exec('python "remove_file.py" '.$ini_array['api_key'].' "'.$_GET["session_id"].'.echoreplay"');
 
-
+// $handle = fopen($fileurl,"r");
+// while (!feof($handle)){
+//     $line_of_text = fgets($handle);
+//     echo $line_of_text;
+// }
+// fclose($handle);
 ?>

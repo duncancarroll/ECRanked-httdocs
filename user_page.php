@@ -6,8 +6,7 @@
   // Create connection
   $mysqli = new mysqli("localhost", "root", "", "ecranked");
 
-  $username = $_GET["username"];
-
+  
   $NewUser = false;
   if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: " . $mysqli->connect_error;
@@ -15,6 +14,7 @@
   }
   $_Ip = $_SERVER["REMOTE_ADDR"];
   $_AccessTime = date("Y-m-d H:i:s");
+  $username = $_GET["username"];
 
   $stmt = $mysqli->prepare("SELECT * FROM users WHERE `oculus_name` = ?");
   $stmt->bind_param('s', $username); // 's' specifies the variable type => 'string'
@@ -396,7 +396,7 @@
       $response = curl_exec($curl_h);
       $jsonData = json_decode($response);
       $discordAvatarLink = "https://cdn.discordapp.com/avatars/" . $discordID . "/" . $jsonData->{'avatar'} . ".png";
-      $discordFullName = $jsonData->{'username'} . "#" . $jsonData->{'discriminator'};
+      $discordFullName = $jsonData->{'username'};
       echo <<<EOT
           <h1 style="text-align:center"> Discord Info </h1>
           <img style="border: 2px solid black; border-radius:100px; margin:10px" src=$discordAvatarLink alt="Discord PFP">
