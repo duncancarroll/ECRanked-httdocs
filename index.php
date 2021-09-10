@@ -45,31 +45,7 @@ while($row = $result->fetch_assoc()){
   .fa-coffee {
     font-size: 200px
   }
-  .autocomplete-items {
-    position: relative;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-    font-size: 30px;
-    width:100%;
-  }
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #222; 
-    border-bottom: 1px solid #d4d4d4; 
-    width:100%;
-  }
-
-  /*when hovering an item:*/
-  .autocomplete-items div:hover {
-  background-color: #444; 
-  }
+  
 </style>
 
 <body>
@@ -77,8 +53,10 @@ while($row = $result->fetch_assoc()){
   <!-- Navbar -->
   <div class="w3-top">
     <div class="w3-bar w3-dark-gray w3-card w3-left-align w3-large">
-      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
         href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
+
       <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">About</a>
       <a href="mailto:support@ecranked.com?subject=Takedown%20Request"
@@ -87,38 +65,40 @@ while($row = $result->fetch_assoc()){
     </div>
 
     <!-- Navbar on small screens -->
-    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+    <div id="navDemo" class="w3-bar-block w3-darkgrey w3-hide w3-hide-large w3-hide-medium w3-large" style ="background-color:#222;color:white">
+      <a href="#" class="round w3-button" style = "width:100%">Link 1</a>
+      <a href="#" class="round w3-button" style = "width:100%">Link 2</a>
+      <a href="#" class="round w3-button" style = "width:100%">Link 3</a>
+      <a href="#" class="round w3-button" style = "width:100%">Link 4</a>
     </div>
   </div>
 
   <!-- Header -->
-  <header class="w3-container w3-black w3-center" style="padding:100px 5px">
+  <header class="w3-container w3-black w3-center" style="padding:100px 5px;background-image: url('/assets/combat_background.jpg'); background-size: cover;">
     <h1 class="w3-margin w3-jumbo">ECRanked</h1>
   </header>
 
   <div class="w3-container w3-dark-gray w3-center w3-padding-64">
-    <div class="w3-xxlarge">Find Your Stats!</div>
-    <div class="search-container" style="width:50%">
-      <form action="/user_search.php"  autocomplete="off">
-        <div class="autocomplete" style="width:100%;margin:10% 50%">
-            <input id="myInput" type="text" name="username" class="round-search w3-xxlarge" style="width:100%" placeholder="Search..." />
-        </div>
-        <input type="submit" style="display: none" />
-      </form>
+    <div class="home-search round padded">
+      <h1>Find Your Stats!</h1>
+      <div class="round" style="width:100%">
+        <form action="/user_search.php"  autocomplete="off">
+          <div class="autocomplete" style="width:100%">
+              <input id="myInput" type="text" name="username" class="text-input" style="width:100%" placeholder="Search..." />
+          </div>
+          <input type="submit" style="display: none" />
+        </form>
+      </div>
     </div>
-
+    
   </div>
 
   <!-- First Grid -->
-  <div class="w3-row-padding w3-padding-64 w3-container w3-dark-gray">
-    <div class="w3-content">
-      <div class="w3-twothird">
+  <div class="w3-row-padding w3-padding-64 w3-container w3-dark-gray ">
+    <div class="w3-content ">
+      <div class="w3-twothird round padded">
         <h1>How it works</h1>
-        <h5 class="w3-padding-32">ECRanked is a system that tracks, saves, and displays data gathered from games of Echo
+        <h5 class="">ECRanked is a system that tracks, saves, and displays data gathered from games of Echo
           Combat. Starting September 1st 2021 almost all games will be spectated and saved. The data that is saved is
           publicly avalable data given to us via the Combat API. The data is only used to caculate intresting statistics
           about players that would have been otherwise impossible to make</h5>
@@ -250,7 +230,7 @@ while($row = $result->fetch_assoc()){
 
   </script>
 
-  <footer> v2.6 </footer>
+  <footer> v2.5.1 </footer>
 </body>
 
 </html>

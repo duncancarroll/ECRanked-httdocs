@@ -157,6 +157,15 @@
   .autocomplete-items div:hover {
   background-color: #444; 
   }
+  .text-input{
+    background-color: transparent;
+    border: none;
+    border-radius: 60;
+    color: white;
+    outline: none;
+    font-size: 15px;
+    padding:5px
+  }
 </style>
 
 
@@ -167,16 +176,26 @@
   <div class="w3-top" style="height:40px">
     <div class="w3-bar w3-dark-gray w3-card w3-left-align w3-large" style="height:51px;overflow:visible">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Home</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">About</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Takedown</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Contact</a>
+      <!-- <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Home</a> -->
+      <a href="/home" class="w3-bar-item w3-button w3-padding-large round">Home</a>
+
+      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">About</a>
+      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Takedown</a>
+      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Contact</a>
       <div class="w3-bar-item-left" style="float:right;height:100%">
-        <form action="/user_search.php" autocomplete="off">
+        <div class="round" style="width:100%">
+          <form action="/user_search.php"  autocomplete="off">
+            <div class="autocomplete" style="width:100%">
+                <input id="myInput" type="text" name="username" class="text-input" style="width:100%" placeholder="Search..." />
+            </div>
+            <input type="submit" style="display: none" />
+          </form>
+        </div>
+        <!-- <form action="/user_search.php" autocomplete="off">
           <div class="autocomplete">
             <input id="myInput" type="text" name="username" class="round-search w3-small" placeholder="Search..." />
           </div>
-          <input type="submit" style="display: none" />
+          <input type="submit" style="display: none" /> -->
       </div>
 
 

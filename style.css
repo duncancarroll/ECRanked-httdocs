@@ -94,7 +94,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 @media (min-width:993px){.w3-modal-content{width:900px}.w3-hide-large{display:none!important}.w3-sidebar.w3-collapse{display:block!important}}
 @media (max-width:992px) and (min-width:601px){.w3-hide-medium{display:none!important}}
 @media (max-width:992px){.w3-sidebar.w3-collapse{display:none}.w3-main{margin-left:0!important;margin-right:0!important}.w3-auto{max-width:100%}}
-.w3-top,.w3-bottom{position:fixed;width:100%;z-index:1}.w3-top{top:0}.w3-bottom{bottom:0}
+.w3-top,.w3-bottom{position:fixed;width:100%;z-index: 100;}.w3-top{top:0}.w3-bottom{bottom:0}
 .w3-overlay{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:2}
 .w3-display-topleft{position:absolute;left:0;top:0}.w3-display-topright{position:absolute;right:0;top:0}
 .w3-display-bottomleft{position:absolute;left:0;bottom:0}.w3-display-bottomright{position:absolute;right:0;bottom:0}
@@ -146,7 +146,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-padding-top-64{padding-top:64px!important}.w3-padding-top-48{padding-top:48px!important}
 .w3-padding-top-32{padding-top:32px!important}.w3-padding-top-24{padding-top:24px!important}
 .w3-left{float:left!important}.w3-right{float:right!important}
-.w3-button:hover{color:#fff!important;background-color:#000!important}
+.w3-button:hover{color:#fff!important;background-color:#333!important}
 .w3-transparent,.w3-hover-none:hover{background-color:transparent!important}
 .w3-hover-none:hover{box-shadow:none!important}
 /* Colors */
@@ -385,7 +385,9 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     background-color:#222;
     margin: 10px
 }
-
+.padded{
+    padding: 10px;
+}
 
 .stats-grid{
     display: grid;
@@ -593,4 +595,58 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 
 .blue-team-color{
     border-color:rgb(65, 160, 228)
+}
+
+.text-input{
+    background-color: transparent;
+    border: none;
+    border-radius: 60;
+    color: white;
+    outline: none;
+    font-size: 40px;
+    padding:10px
+}
+
+.autocomplete-items {
+    position: relative;
+    border: none;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    font-size: 40px;
+    width:100%;
+    text-align: left;
+    padding:none;
+    background-color: transparent;
+  }
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #222; 
+    border-bottom: 1px solid #d4d4d4; 
+    width:100%;
+    
+  }
+
+  /*when hovering an item:*/
+  .autocomplete-items div:hover {
+  background-color: #444; 
+  }
+
+.home-search{
+    width:50%; margin:auto
+}
+@media (min-width:600px) and (max-width:1200px) {
+    .home-search{
+        width:75%
+    }
+}
+@media (max-width:600px) {
+    .home-search{
+        width:100%
+    }
 }
