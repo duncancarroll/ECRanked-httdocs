@@ -174,7 +174,7 @@
       <div class="w3-bar-item-left" style="float:right;height:100%">
         <form action="/user_search.php" autocomplete="off">
           <div class="autocomplete">
-            <input id="myInput" type="text" name="username" class="round w3-small" placeholder="Search..." />
+            <input id="myInput" type="text" name="username" class="round-search w3-small" placeholder="Search..." />
           </div>
           <input type="submit" style="display: none" />
       </div>
@@ -211,9 +211,9 @@
 
   <div class="user-page-container">
     <!-- Right Bar-->
-    <div class="replays-container">
+    <div class="round replays-container">
       <header style="padding:auto;text-align:center">
-        <h2>Recent Games<h2>
+        <h1>Recent Games<h1>
       </header>
 
 
@@ -233,7 +233,7 @@
         // Outputs a date/time string based on the time zone you've set on the object.
         $triggerOn = $datetime->format('M jS g:iA');
         echo <<<EOT
-        <a class="replay-links" href="/replay/{$skimData["session_id"] }">
+        <a class="round button-list" href="/replay/{$skimData["session_id"] }">
           <p style="text-align: center">
             {$triggerOn} - [{$skimData["map"] }] 
           </p>
@@ -280,7 +280,7 @@
 
 
     ?>
-    <div class="user-stats">
+    <div class="round user-stats">
       <header><h1 style="text-align:center">Stats<h1></header>
       <header class="stats-grid" style="padding:auto;text-align:center">
 
@@ -366,7 +366,7 @@
 
     </div>
     <!-- Left Bar-->
-    <div class="discord-container">
+    <div class="round discord-container">
       <a href=""></a>
       <?php
       if ($discordID == NULL) {

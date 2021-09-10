@@ -138,7 +138,7 @@ sessionID   = data["session_id"]
 print("print 132")
 
 
-startTime   =  datetime.strptime(data["start_time"].replace("/","-"),"%Y-%m-%d %H:%M:%S") #
+startTime   =  datetime.strptime(data["start_time"].replace("/","-").split(".")[0],"%Y-%m-%d %H:%M:%S") #
 FormatedStartTime = datetime.strftime(startTime,"%Y-%m-%d %H-%M-%S")
 print("print 136")
 

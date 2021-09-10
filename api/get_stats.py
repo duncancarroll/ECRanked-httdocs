@@ -8,11 +8,19 @@ from datetime import datetime
 import mysql.connector
 import json
 import traceback
-
+import requests
 if "username" not in form:
     print("Content-Type: text/html\n\n")
     print("Status: 404 Not Found")
     quit()
+
+import configparser
+from pathlib import Path
+config = configparser.ConfigParser()
+d = Path(__file__).resolve().parents[1]
+print(d)
+config.read(f"{d}\config.ini")
+bot_token = config.get('config','bot_token')
 
 username = form["username"].value
 #print(form)
@@ -76,6 +84,14 @@ def GetUserData(_username):
         }
 
         #print(userStatData)
+
+    query = "SELECT discord_id FROM `ecranked`.`users` WHERE oculus_name=%s"
+    cursor.execute(query,(_username,))
+    userStatData["discord_id"] = None
+    for (userData,) in cursor:
+        userStatData["discord_id"] = userData
+
+        #print(userStatData)
     return userStatData
 
 
@@ -95,20 +111,39 @@ if playerStatData is None:
 
 
 print("Content-Type: application/json;charset=utf-8\n")
+try:
+    #print("Status: 404 Not Found")
+    returnData = dict()
+    #print(playerStatData)
+    returnData["average_speed"] = playerStatData["total_speed"]/playerStatData["frames_speed"]
+    returnData["average_ping"] = playerStatData["total_ping"]/playerStatData["frames_ping"]
+    returnData["percent_stopped"] = 100*(playerStatData["total_stopped"]/playerStatData["frames_stopped"])
+    returnData["percent_upsidedown"] = 100*(playerStatData["total_upsidedown"]/playerStatData["frames_upsidedown"])
+    returnData["total_games"] = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
+    returnData["total_deaths"] = playerStatData["total_deaths"]
+    returnData["average_deaths"] = playerStatData["total_deaths"] / returnData["total_games"]
+    returnData["discord_name"] = None
+    returnData["discord_pfp"] = None
+    
+    if playerStatData['discord_id'] != None:
+        headerData = {
+            "User-Agent":"EchoCombatRanked/2.15 ECRanked.com/2.4",
+            "Authorization":f"Bot {bot_token}",
+        }
+        try:
+            responce = requests.get(f"https://discord.com/api/users/{playerStatData['discord_id']}",headers = headerData)
+            discord_data = responce.json()
+            returnData["discord_name"] = discord_data["username"]
+            returnData["discord_pfp"] = f"https://cdn.discordapp.com/avatars/{playerStatData['discord_id']}/{discord_data['avatar']}.png";
+        except Exception as e:
+            error = e
+        
 
 
-#print("Status: 404 Not Found")
-returnData = dict()
-#print(playerStatData)
-returnData["average_speed"] = playerStatData["total_speed"]/playerStatData["frames_speed"]
-returnData["average_ping"] = playerStatData["total_ping"]/playerStatData["frames_ping"]
-returnData["percent_stopped"] = 100*(playerStatData["total_stopped"]/playerStatData["frames_stopped"])
-returnData["percent_upsidedown"] = 100*(playerStatData["total_upsidedown"]/playerStatData["frames_upsidedown"])
-returnData["total_games"] = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
-returnData["total_deaths"] = playerStatData["total_deaths"]
-returnData["average_deaths"] = playerStatData["total_deaths"] / returnData["total_games"]
+    print(returnData)
+except Exception as e:
+    print( {"error":e})
 
-print(returnData)
 
 
 

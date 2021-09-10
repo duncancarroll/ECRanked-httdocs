@@ -235,7 +235,17 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-pale-red,.w3-hover-border-pale-red:hover{border-color:#ffe7e7!important}.w3-border-pale-green,.w3-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 
+
+.fully-rounded {
+    border: 2px solid white;
+    border-radius: 60px;
+}
 .round {
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.round-search {
     /*width: 100%;*/
     border-radius: 15px;
     border: 1px #000 solid;
@@ -264,7 +274,60 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 }
 
 
+.download-button{
+    color:white;
+    background-color: #222;
 
+    outline-offset: 15px;
+    z-index: 1;
+}
+.download-timeout{
+    position: relative;
+    float:left;
+    height: 0px;
+    color:white;
+    background-color: #222;
+    margin:-2px 2px 2px;
+    padding:0px;
+    z-index: 0;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0%;
+    height: 0;
+    padding:0px;
+
+  }
+  5% {
+    opacity: 0%;
+    height: 80px;
+    padding:10px;
+  }
+  10% {
+    opacity: 100%;
+    height: 80px;
+
+  }
+  90% {
+    opacity: 100%;
+    height: 80px;
+    padding:10px;
+
+  }
+  95% {
+    opacity: 0%;
+    height: 80px;
+    padding:10px;
+
+  }
+  to {
+    opacity: 0%;
+    height: 0px;
+    padding:0px;
+
+  }
+}
 
 .stat-container.h2{
     color:white; 
@@ -282,13 +345,13 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 }
 .discord-container{
     float:left;
+    padding: 10px;
     margin: 20px 1% 20px;
     width: 20%;
+    z-index: 1;
     color:white;
     background-color: #222;
-    border: 2px solid white;
-    border-radius: 10px;
-    float:left
+    float:left;
 }
 .user-stats{
     padding:10px;
@@ -296,24 +359,31 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     background-color:#222;
     float:left;
     width: 48%;
-    border: 2px solid white; 
-    border-radius: 10px;
+}
+.download-container{
+    padding:0px;
+    margin: 20px 1% 20px;
+    background-color:#222;
+    float:left;
+    width: 20%;
+}
+.download-sub-container{
+    padding:10px;
+    margin:-2px;
 }
 
 
 .replays-container{
-    padding:10px;
+    padding:10px 10px 0px;
     margin: 20px 1% 20px;
     background-color:#222;
     color:white;
     float:left;
     width: 25%;
-    border: 2px solid white;
-    border-radius: 10px;
 }
 .user-page-container{
     background-color:#222;
-    margin: 20px
+    margin: 10px
 }
 
 
@@ -450,12 +520,24 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     align-items: center;
     background-color:#333;
     height:40px;
-    border: 2px solid white;
-    border-radius: 60px;
     padding: 10px;
     margin: 10px 5px;
     text-decoration: none;
 }
+
+.button-list{
+    display: flex;
+    align-items: center;
+    background-color:#333;
+    height:40px;
+    padding: 10px;
+    margin: 10px 0px;
+    text-decoration: none;
+    
+}
+.button-list:hover {
+    background-color: #444;
+  }
 
 
 @media (min-width:600px) and (max-width:1000px) {
@@ -504,3 +586,11 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     }
 }
 
+.orange-team-color{
+    border-color:rgb(230, 167, 50)
+}
+
+
+.blue-team-color{
+    border-color:rgb(65, 160, 228)
+}

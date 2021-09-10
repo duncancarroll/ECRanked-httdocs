@@ -105,7 +105,7 @@ while($row = $result->fetch_assoc()){
     <div class="search-container" style="width:50%">
       <form action="/user_search.php"  autocomplete="off">
         <div class="autocomplete" style="width:100%;margin:10% 50%">
-            <input id="myInput" type="text" name="username" class="round w3-xxlarge" style="width:100%" placeholder="Search..." />
+            <input id="myInput" type="text" name="username" class="round-search w3-xxlarge" style="width:100%" placeholder="Search..." />
         </div>
         <input type="submit" style="display: none" />
       </form>
@@ -250,6 +250,7 @@ while($row = $result->fetch_assoc()){
 
   </script>
 
+  <footer> v2.6 </footer>
 </body>
 
 </html>

@@ -5,7 +5,7 @@
 
   // Create connection
   $mysqli = new mysqli("localhost", "root", "", "ecranked");
-
+  
   $session_id = $_GET["session_id"];
 
   $NewUser = false;
@@ -24,8 +24,8 @@
   
   $skimData = $result->fetch_assoc();
   if ($result->num_rows == 0) {
-    #header('Location: /home');
-    #die();
+    header('Location: /home');
+    die();
   }
 
   function map(float $inmin, float $inmax, float $outmin, float $outmax, float $value)
@@ -56,6 +56,16 @@
   while($row = $result->fetch_assoc()){
     array_push($usernames, $row["oculus_name"]);
   }
+  $replay_link = $skimData["replay_link"];
+  $skim_link = str_replace("Replays","Skims",$replay_link);
+  $skim_link = str_replace(".echoreplay",".ecrs",$skim_link);
+  try {
+    //code...
+  } catch (\Throwable $th) {
+    //throw $th;
+  }
+  $skimDataJson = json_decode(file_get_contents($skim_link), true);
+
 
 
 ?>
@@ -159,7 +169,7 @@
       <div class="w3-bar-item-left" style="float:right;height:100%">
         <form action="/user_search.php" autocomplete="off">
           <div class="autocomplete">
-            <input id="myInput" type="text" name="username" class="round w3-small" placeholder="Search..." />
+            <input id="myInput" type="text" name="username" class="round-search w3-small" placeholder="Search..." />
           </div>
           <input type="submit" style="display: none" />
       </div>
@@ -196,23 +206,49 @@
 
   <div class="user-page-container">
     <!-- Right Bar-->
-    <div class="replays-container">
+    <div class="round replays-container">
       <header style="padding:auto;text-align:center">
-        <h2>Players<h2>
+        <h1>Players<h1>
       </header>
 
 
       <?php
         $oculus_ids = $skimData["player_ids"];
         $oculus_ids_arr = explode (",", $oculus_ids); 
-        foreach ($oculus_ids_arr as $oculus_id){
-            
+        foreach ($skimDataJson["players"] as $player_data){
+            $oculus_id = $player_data["userid"];
+            $team_id = $player_data["team"];
+            switch ($team_id) {
+              case 0:
+                $team_class = "orange-team-color";
+                # code...
+                break;
+              
+              case 1:
+                $team_class = "blue-team-color";
+                # code...
+                break;
+
+              default:
+                $team_class = "";
+
+                # code...
+                break;
+            }
             $result = mysqli_query($mysqli, "SELECT `oculus_name` FROM `users` WHERE `oculus_id` = ".$oculus_id);
-            $oculus_name = ($result->fetch_assoc())["oculus_name"];
+            $row = $result->fetch_assoc();
+            if($row){
+              $oculus_name = $row["oculus_name"];
+
+            }else
+            {
+              $oculus_name = "anonymous";
+
+            }
 
             // Outputs a date/time string based on the time zone you've set on the object.
             echo <<<EOT
-            <a class="replay-links" href="/user/$oculus_name/stats">
+            <a class="fully-rounded button-list $team_class" href="/user/$oculus_name/stats">
               <p style="text-align: center">
                 $oculus_name
               </p>
@@ -223,10 +259,8 @@
       ?>
 
     </div>
-    <?php
-
-    ?>
-    <div class="user-stats">
+    
+    <div class="round user-stats">
       <header><h1 style="text-align:center">About Game<h1></header>
       <header class="stats-grid" style="padding:auto;text-align:center">
 
@@ -236,12 +270,19 @@
 
 
     </div>
+    <script>
+      
+
+    </script>
     <!-- Left Bar-->
-    <div class="discord-container">
-        <a href="/replay/<?php echo $session_id?>/download">
-            <h1 style="text-align:center"> Download </h1>
-        </a>
-        
+    <div class="round download-container">
+      <div class="round download-sub-container">
+        <h1 style="text-align:center;cursor:pointer" onclick="downloadReplay('<?php echo htmlspecialchars($session_id, ENT_QUOTES, 'UTF-8')?>',this)"> Download </h1>
+
+      </div>
+      <p class= "download-timeout" id="discord-timeout-id" style="opacity:0%;height:0px;background-color:rgba(0,0,0,0)"> 
+      Your downloading too much please wait
+      </p>
     </div>
 
 
@@ -384,6 +425,63 @@
     var usernames = <?php echo json_encode($usernames)?>;
     /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
     autocomplete(document.getElementById("myInput"), usernames);
+
+    function downloadReplay(session_id,element){
+      var responce = fetch(window.location.href+"/trydownload")
+      responce.then(function(responce) {
+        statusCode = responce.status
+        if (statusCode == 200){
+          location.href = window.location.href+"/download";
+        }
+        else
+        {
+          responce.text().then(
+            function(seconds) {
+              Errorelement = document.getElementById("discord-timeout-id");
+              Errorelement.style = "opacity:0%;height:0px;background-color:rgba(0,0,0,0);animation-duration: 3s;animation-name: slidein;";
+              Errorelement.innerHTML = "Your downloading too much please wait "+seconds+" seconds before trying again";
+
+              setTimeout(function ()
+              {
+                Errorelement.innerHTML = "Your downloading too much please wait "+(seconds-1)+" seconds before trying again";
+                setTimeout(function ()
+                {
+                  Errorelement.innerHTML = "Your downloading too much please wait "+(seconds-2)+" seconds before trying again";
+                      setTimeout(function ()
+                  {
+                    Errorelement.style = "opacity:0%;height:0px;background-color:rgba(0,0,0,0)";
+                  }, 1000);
+                }, 1000);
+              }, 1000);
+            })
+        }
+      });
+        // .then(function(responce) {
+        //   console.log(responce);
+        //   returnStatus = responce["status"]
+        //   
+        //   return response
+        // })
+        // .then(response => console.log(response.text()))
+      
+      
+      
+      
+      // .then(function(response) {
+      //   return response
+      // }).then(function(data) {
+      //   console.log(data);
+      //   returnStatus = data["status"]
+      //   if (returnStatus == 200){
+      //     location.href = window.location.href+"/download";
+      //   } else {
+      //     let seconds = response.text();
+      //     alert("you downloading too much please wait "+seconds+" seconds");
+      //   }
+      // }).catch(function() {
+      //   console.log("Booo");
+      // });
+    }
   </script>
 
 </body>
