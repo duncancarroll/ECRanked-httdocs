@@ -117,25 +117,32 @@ try:
     #print("Status: 404 Not Found")
     returnData = dict()
     #print(playerStatData)
-    returnData["average_speed"] = playerStatData["total_speed"]/playerStatData["frames_speed"]
-    returnData["average_ping"] = playerStatData["total_ping"]/playerStatData["frames_ping"]
-    returnData["percent_stopped"] = 100*(playerStatData["total_stopped"]/playerStatData["frames_stopped"])
-    returnData["percent_upsidedown"] = 100*(playerStatData["total_upsidedown"]/playerStatData["frames_upsidedown"])
-    returnData["total_games"] = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
-    returnData["total_deaths"] = playerStatData["total_deaths"]
-    returnData["average_deaths"] = playerStatData["total_deaths"] / returnData["total_games"]
+    returnData["average_speed"]      = round(playerStatData["total_speed"]/playerStatData["frames_speed"],4)
+    returnData["average_ping"]       = round(playerStatData["total_ping"]/playerStatData["frames_ping"],3)
+    returnData["percent_stopped"]    = round(playerStatData["total_stopped"]/playerStatData["frames_stopped"],6)
+    returnData["percent_upsidedown"] = round(playerStatData["total_upsidedown"]/playerStatData["frames_upsidedown"],6)
+    returnData["total_games"]        = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
+    returnData["total_deaths"]       = playerStatData["total_deaths"]
+    returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
     returnData["discord_name"] = None
     returnData["discord_pfp"] = None
 
     loadoutData = json.loads(playerStatData["loadout"])
     returnLoadout = dict()
+    topLoadout = dict()
     framesLoadout =  playerStatData["frames_loadout"]
     if playerStatData["frames_loadout"] != 0:
        
         for key, value in loadoutData.items():
-            returnLoadout[key] = value/framesLoadout
+            returnLoadout[key] = round(value/framesLoadout,6)
 
+        topLoadout = sorted(returnLoadout.items(), key=lambda item: item[1],reverse=True)
         returnData["loadout"] = returnLoadout
+        returnData["top_loadout"] = topLoadout
+
+
+
+
     else:
         returnData["loadout"] = None
     if playerStatData['discord_id'] != None:

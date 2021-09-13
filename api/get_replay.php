@@ -86,6 +86,12 @@ $stmt->bind_param('s', $_GET["session_id"]); // 's' specifies the variable type 
 $stmt->execute();
 $result = $stmt->get_result();
 
+if($result->num_rows < 1){
+    http_response_code(404);
+    echo "replay not found";  
+    die();
+}
+
 while($row = $result->fetch_assoc()) {
     $fileurl = $row["replay_link"];
     $fileurl = str_replace("/", "\\", $fileurl);

@@ -26,6 +26,7 @@
   if ($result->num_rows == 0) {
     header("Status: 404 Not Found");
     echo("session id not found");
+    die();
   }
 
   function map(float $inmin, float $inmax, float $outmin, float $outmax, float $value)

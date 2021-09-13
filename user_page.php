@@ -2,41 +2,43 @@
 <html lang="en">
 <?php
 
-
   // Create connection
   $mysqli = new mysqli("localhost", "root", "", "ecranked");
-
-  
-  $NewUser = false;
   if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: " . $mysqli->connect_error;
     exit();
   }
-  $_Ip = $_SERVER["REMOTE_ADDR"];
-  $_AccessTime = date("Y-m-d H:i:s");
   $username = $_GET["username"];
-
   $stmt = $mysqli->prepare("SELECT * FROM users WHERE `oculus_name` = ?");
   $stmt->bind_param('s', $username); // 's' specifies the variable type => 'string'
   $stmt->execute();
   $result = $stmt->get_result();
-
-  $userData = $result->fetch_assoc();
   if ($result->num_rows == 0) {
-    header('Location: /home');
+    #header('Location: /home');
     die();
   }
+
+  $userData = $result->fetch_assoc();
   if ($userData["discord_name"] == NULL) {
     $discordID = NULL;
   } else {
     $discordID = $userData["discord_id"];
   }
   $ouclus_id = $userData["oculus_id"];
-  $stmt = $mysqli->prepare("SELECT * FROM stats WHERE `oculus_id` = ?");
-  $stmt->bind_param('s', $ouclus_id); // 's' specifies the variable type => 'string'
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $statData = $result->fetch_assoc();
+
+  $_Ip = $_SERVER["REMOTE_ADDR"];
+  $_AccessTime = date("Y-m-d H:i:s");
+ 
+
+
+
+
+
+  $statDataStr = file_get_contents("http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}.json");
+  $statData = json_decode($statDataStr,true);
+  
+  
+
 
 
 
@@ -77,7 +79,7 @@
 <title><?php echo htmlspecialchars(ucfirst($username), ENT_QUOTES, 'UTF-8') ?>'s User page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -272,12 +274,12 @@
 
       $skimData = $result->fetch_assoc();
 
-      $total_games = $statData["total_games_combustion"] + $statData["total_games_dyson"] + $statData["total_games_fission"] + $statData["total_games_surge"];
+      $total_games = $statData["total_games"];
       $total_deaths = $statData["total_deaths"];
-      $average_speed = $statData["total_speed"] /  $statData["frames_speed"];
-      $average_ping = $statData["total_ping"] /  $statData["frames_ping"];
-      $percent_stopped = ($statData["total_stopped"] /  $statData["frames_stopped"]) * 100;
-      $percent_upsidedown = ($statData["total_upsidedown"] /  $statData["frames_upsidedown"]) * 100;
+      $average_speed = $statData["average_speed"];
+      $average_ping = $statData["average_ping"];
+      $percent_stopped = $statData["percent_stopped"];
+      $percent_upsidedown = $statData["percent_upsidedown"];
       $deaths_per_game = $total_deaths /  $total_games;
 
 
@@ -395,10 +397,8 @@
           </div>
         EOT;
 
-        die();
-      }
-
-      $curl_h = curl_init("https://discord.com/api/users/" . $discordID);
+      } else{
+        $curl_h = curl_init("https://discord.com/api/users/" . $discordID);
 
       curl_setopt(
         $curl_h,
@@ -422,13 +422,51 @@
           <span style="font-size:20px;"> $discordFullName</span>
         </div>
       EOT;
+      }
+
+      
 
 
       ?>
 
     </div>
 
+    <div class="round loadout-container">
+      <header><h1 style="text-align:center">Loadout<h1></header>
+      <header class="stats-grid" style="padding:auto;text-align:center">
+        <?php
+          $topLoadout = $statData["top_loadout"];
 
+          $weaponName = ["Pulsar","Nova","Comet","Meteor"];
+          $abilityName = ["Repair Matrix","Threat Scanner","Energy Barrier","Phase Shift"];
+
+          $grenadeName = ["Detonator","Stun Field","Arc Mine","Instant Repair"];
+
+          foreach (range(0, 3) as $number){
+            
+            $loadoutNumber = $topLoadout[$number][0];
+            $abilityNumber = $loadoutNumber % 4;
+            $grenadeNumber = (($loadoutNumber - $abilityNumber) % 16)/4;
+            $weaponNumber = (($loadoutNumber - ($abilityNumber + $grenadeNumber)) % 64)/16;
+            $loadoutpercentage = round($topLoadout[$number][1]*100,2);
+            echo <<<EOT
+            <div class="round loadout-sub-container">
+                {$weaponName[$weaponNumber]} <br>
+                {$grenadeName[$grenadeNumber]} <br>
+                {$abilityName[$abilityNumber]} <br>
+              <b> $loadoutpercentage% </b>
+            </div>
+            EOT;
+          }
+            
+          
+         
+
+        ?>
+      </header>
+
+
+    </div>
 
 
 
