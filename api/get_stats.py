@@ -153,7 +153,7 @@ try:
         
 
     returnDataStr =  json.dumps(returnData).replace(": None",": null")
-    print(returnData)
+    print(returnDataStr)
 except Exception as e:
     print( {"error":e})
 
