@@ -301,98 +301,154 @@
 
 
     ?>
-    <div class="round user-stats">
-      <header><h1 style="text-align:center">Stats<h1></header>
-      <header class="stats-grid" style="padding:auto;text-align:center">
 
-        <div class="stat-container">
-          Total Games
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $total_games_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($total_games) ?>
+    <div class="stat-loadout-container">
+      <div class="round user-stats">
+        <header><h1 style="text-align:center">Stats<h1></header>
+        <header class="stats-grid" style="padding:auto;text-align:center">
+
+          <div class="stat-container">
+            Total Games
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $total_games_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($total_games) ?>
+              </p>
+
+            </div>
             </p>
-
           </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Total Deaths
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $total_deaths_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($total_deaths) ?>
+          <div class="stat-container">
+            Total Deaths
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $total_deaths_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($total_deaths) ?>
+              </p>
+
+            </div>
+          </div>
+          <div class="stat-container">
+            Average Ping
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $average_ping_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($average_ping, 1) ?>ms
+              </p>
+
+            </div>
             </p>
-
           </div>
-        </div>
-        <div class="stat-container">
-          Average Ping
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $average_ping_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($average_ping, 1) ?>ms
+          <div class="stat-container">
+            Average Speed
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $average_speed_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($average_speed, 2) ?>m/s
+              </p>
+
+            </div>
             </p>
-
           </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Average Speed
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $average_speed_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($average_speed, 2) ?>m/s
+          <div class="stat-container">
+            Time stopped
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $percent_stopped_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($percent_stopped) ?>%
+              </p>
+
+            </div>
             </p>
-
           </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Time stopped
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $percent_stopped_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($percent_stopped) ?>%
+          <div class="stat-container">
+            Inverted
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $percent_upsidedown_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($percent_upsidedown) ?>%
+              </p>
+
+            </div>
             </p>
-
           </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Inverted
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $percent_upsidedown_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($percent_upsidedown) ?>%
+          <div class="stat-container">
+            Deaths / game
+            <div class="stats-bar">
+              <p class="stat-bar" style="<?php echo $deaths_per_game_bar ?>"></p>
+              <p class="stat-bar-text">
+                <?php echo round($deaths_per_game, 1) ?>
+              </p>
+
+            </div>
             </p>
-
           </div>
-          </p>
-        </div>
-        <div class="stat-container">
-          Deaths / game
-          <div class="stats-bar">
-            <p class="stat-bar" style="<?php echo $deaths_per_game_bar ?>"></p>
-            <p class="stat-bar-text">
-              <?php echo round($deaths_per_game, 1) ?>
-            </p>
 
-          </div>
-          </p>
-        </div>
-
-      </header>
+        </header>
 
 
+      </div>
+      <div class="round loadout-container">
+        <header><h1 style="text-align:center">Loadout<h1></header>
+        <header class="loadout-grid" style="padding:auto;text-align:center">
+          <?php
+            $topLoadout = $statData["top_loadout"];
+
+            $weaponName = ["Pulsar","Nova","Comet","Meteor"];
+            $abilityName = ["Repair Matrix","Threat Scanner","Energy Barrier","Phase Shift"];
+
+            $grenadeName = ["Detonator","Stun Field","Arc Mine","Instant Repair"];
+
+            foreach (range(0, 3) as $number){
+              
+              $loadoutNumber = $topLoadout[$number][0];
+              $abilityNumber = $loadoutNumber % 4;
+              $grenadeNumber = (($loadoutNumber - $abilityNumber) % 16)/4;
+              $weaponNumber = (($loadoutNumber - ($abilityNumber + $grenadeNumber)) % 64)/16;
+              $loadoutpercentage = round($topLoadout[$number][1]*100,2);
+              echo <<<EOT
+              <div class="round loadout-sub-container">
+                  {$weaponName[$weaponNumber]} <br>
+                  {$grenadeName[$grenadeNumber]} <br>
+                  {$abilityName[$abilityNumber]} <br>
+                <b> $loadoutpercentage% </b>
+              </div>
+              EOT;
+            }
+              
+            
+          
+
+          ?>
+        </header>
+
+
+      </div>
     </div>
+    
     <!-- Left Bar-->
     <div class="round discord-container">
       <a href=""></a>
       <?php
+      echo <<<EOT
+      <h1 style="text-align:center"> Info </h1>
+      EOT;
+
+
+      
+      if ($userData["about_string"] == NULL){
+        echo <<<EOT
+          <p> Contact BiffBish if you wanna put something here</p>
+        EOT;
+      } else{
+        echo <<<EOT
+          <p> {$userData["about_string"]}</p>
+        EOT;
+      }
+
+
       if ($discordID == NULL) {
         echo <<<EOT
-            <h1 style="text-align:center"> Discord Info </h1>
             <span style="font-size:15px;"> Theres no discord account linked. If you wish to link your discord account contact one of the developers</span>
           </div>
         EOT;
@@ -414,59 +470,22 @@
 
       $response = curl_exec($curl_h);
       $jsonData = json_decode($response);
-      $discordAvatarLink = "https://cdn.discordapp.com/avatars/" . $discordID . "/" . $jsonData->{'avatar'} . ".png";
+      $discordAvatarLink = "https://cdn.discordapp.com/avatars/" . $discordID . "/" . $jsonData->{'avatar'} . ".png?size=32";
       $discordFullName = $jsonData->{'username'};
       echo <<<EOT
-          <h1 style="text-align:center"> Discord Info </h1>
           <img style="border: 2px solid black; border-radius:100px; margin:10px" src=$discordAvatarLink alt="Discord PFP">
           <span style="font-size:20px;"> $discordFullName</span>
+          
         </div>
       EOT;
       }
-
-      
 
 
       ?>
 
     </div>
 
-    <div class="round loadout-container">
-      <header><h1 style="text-align:center">Loadout<h1></header>
-      <header class="stats-grid" style="padding:auto;text-align:center">
-        <?php
-          $topLoadout = $statData["top_loadout"];
-
-          $weaponName = ["Pulsar","Nova","Comet","Meteor"];
-          $abilityName = ["Repair Matrix","Threat Scanner","Energy Barrier","Phase Shift"];
-
-          $grenadeName = ["Detonator","Stun Field","Arc Mine","Instant Repair"];
-
-          foreach (range(0, 3) as $number){
-            
-            $loadoutNumber = $topLoadout[$number][0];
-            $abilityNumber = $loadoutNumber % 4;
-            $grenadeNumber = (($loadoutNumber - $abilityNumber) % 16)/4;
-            $weaponNumber = (($loadoutNumber - ($abilityNumber + $grenadeNumber)) % 64)/16;
-            $loadoutpercentage = round($topLoadout[$number][1]*100,2);
-            echo <<<EOT
-            <div class="round loadout-sub-container">
-                {$weaponName[$weaponNumber]} <br>
-                {$grenadeName[$grenadeNumber]} <br>
-                {$abilityName[$abilityNumber]} <br>
-              <b> $loadoutpercentage% </b>
-            </div>
-            EOT;
-          }
-            
-          
-         
-
-        ?>
-      </header>
-
-
-    </div>
+    
 
 
 

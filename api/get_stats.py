@@ -126,6 +126,7 @@ try:
     returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
     returnData["discord_name"] = None
     returnData["discord_pfp"] = None
+    returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
 
     loadoutData = json.loads(playerStatData["loadout"])
     returnLoadout = dict()
