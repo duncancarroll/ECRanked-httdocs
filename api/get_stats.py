@@ -94,6 +94,15 @@ def GetUserData(_username):
         userStatData["discord_id"] = userData
 
         #print(userStatData)
+
+
+    query = "SELECT about_string FROM `ecranked`.`users` WHERE oculus_name=%s"
+    cursor.execute(query,(_username,))
+    userStatData["about_string"] = None
+    for (userData,) in cursor:
+        userStatData["about_string"] = userData
+
+        #print(userStatData)
     return userStatData
 
 
@@ -117,6 +126,8 @@ try:
     #print("Status: 404 Not Found")
     returnData = dict()
     #print(playerStatData)
+    returnData["about_string"] = playerStatData["about_string"]
+
     returnData["average_speed"]      = round(playerStatData["total_speed"]/playerStatData["frames_speed"],4)
     returnData["average_ping"]       = round(playerStatData["total_ping"]/playerStatData["frames_ping"],3)
     returnData["percent_stopped"]    = round(playerStatData["total_stopped"]/playerStatData["frames_stopped"],6)
@@ -159,7 +170,6 @@ try:
         except Exception as e:
             error = e
         
-
     returnDataStr =  json.dumps(returnData).replace(": None",": null")
     print(returnDataStr)
 except Exception as e:
