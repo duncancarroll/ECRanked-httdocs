@@ -153,6 +153,7 @@ print("print 136")
 totalFrames = data["frames"]
 mapName     = data["map"]
 replayLink  = data["replay_link"]
+skimLink  = data["skim_link"]
 
 playerIDs   = []
 
@@ -228,10 +229,10 @@ print(f"print 187")
 print(f"print 194")
 
 query = ("INSERT INTO `ecranked`.`skims`"
-    "(`session_id`, `start_time`, `frames`, `map`, `player_ids`, `replay_link`)"
-    " VALUES (%s, %s, %s, %s, %s, %s)"
+    "(`session_id`, `start_time`, `frames`, `map`, `player_ids`, `replay_link`, `skim_link`)"
+    " VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-cursor.execute(query,(sessionID,startTime,totalFrames,mapName,playerIDsStr,replayLink))
+cursor.execute(query,(sessionID,startTime,totalFrames,mapName,playerIDsStr,replayLink,skimLink))
 print("finished")
 cnx.commit()
 cursor.close()
