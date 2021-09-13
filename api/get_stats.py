@@ -61,6 +61,8 @@ def GetUserData(_username):
         "frames_stopped",
         "total_speed",
         "frames_speed",
+        "frames_loadout",
+        "loadout",
     ]
 
     
@@ -124,7 +126,18 @@ try:
     returnData["average_deaths"] = playerStatData["total_deaths"] / returnData["total_games"]
     returnData["discord_name"] = None
     returnData["discord_pfp"] = None
-    
+
+    loadoutData = json.loads(playerStatData["loadout"])
+    returnLoadout = dict()
+    framesLoadout =  playerStatData["frames_loadout"]
+    if playerStatData["frames_loadout"] != 0:
+       
+        for key, value in loadoutData.items():
+            returnLoadout[key] = value/framesLoadout
+
+        returnData["loadout"] = returnLoadout
+    else:
+        returnData["loadout"] = None
     if playerStatData['discord_id'] != None:
         headerData = {
             "User-Agent":"EchoCombatRanked/2.15 ECRanked.com/2.4",
@@ -139,7 +152,7 @@ try:
             error = e
         
 
-
+    returnDataStr =  json.dumps(returnData).replace(": None",": null")
     print(returnData)
 except Exception as e:
     print( {"error":e})

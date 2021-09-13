@@ -183,7 +183,7 @@
       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Takedown</a>
       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Contact</a>
       <div class="w3-bar-item-left" style="float:right;height:100%">
-        <div class="round" style="width:100%">
+        <div class="round" style="width:80%">
           <form action="/user_search.php"  autocomplete="off">
             <div class="autocomplete" style="width:100%">
                 <input id="myInput" type="text" name="username" class="text-input" style="width:100%" placeholder="Search..." />

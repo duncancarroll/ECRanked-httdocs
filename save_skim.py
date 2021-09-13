@@ -57,6 +57,8 @@ def GetUserData(userID,userName):
         "frames_stopped",
         "total_speed",
         "frames_speed",
+        "frames_loadout",
+        "loadout",
     ]
 
     
@@ -95,14 +97,20 @@ def SaveStatData(userID,StatData):
 
         "total_speed",
         "frames_speed",
+
+        "frames_loadout",
     ]
 
 
     SetString = []
     for userKey in UserKeys:
         SetString.append(f"`{userKey}` = {StatData[userKey]}")
+
+    SetString.append(f"`loadout` = '{StatData['loadout']}'")
+
     SetStringFull = ' ,'.join(SetString)
     query = (f"UPDATE `ecranked`.`stats` SET {SetStringFull} WHERE (`oculus_id` = {userID})")
+    print(query)
     cursor.execute(query)
 
 
@@ -174,6 +182,22 @@ for playername, playerData in data["players"].items():
     playerStatData["frames_stopped"] += SkimStatPlayerData["frames_stopped"]
     playerStatData["total_speed"] += SkimStatPlayerData["total_speed"]
     playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
+    playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
+
+
+    playerStatData["frames_loadout"] += SkimStatPlayerData["frames_loadout"]
+    savedLoadoutData = json.loads(playerStatData["loadout"])
+    print(savedLoadoutData)
+
+    skimLoadoutData = SkimStatPlayerData["loadout"]
+    print(json.dumps(skimLoadoutData))
+
+    for key,value in skimLoadoutData.items():
+        if key not in savedLoadoutData:
+            savedLoadoutData[key] = 0
+        savedLoadoutData[key] += value
+    playerStatData["loadout"] = json.dumps(savedLoadoutData)
+
     print(f"print 167 {playername}")
 
 
