@@ -12,6 +12,7 @@ body {
     font-feature-settings: "kern" 1;
     font-kerning: normal;
     padding: 30px;
+    font-weight: 500;
   }
   
   @media only screen and (max-width: 600px) {
@@ -183,24 +184,21 @@ a:active{
   
   h1{
     border-bottom: 1px solid #21262d;
-
+    font-size: 2em;
   }
-    h2{
-    padding-bottom: .3em;
-    font-size: 1.5em;
-    border-bottom: 1px solid #21262d;
+  h2{
+  padding-bottom: .3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #21262d;
+  }
+  h3{
+    font-size: 1.25em;
+
   }
     
-  h1, h2, h3 {
-    padding-bottom: .3em;
-    color: #c9d1d9;
-    font-weight: 600;
-    line-height: 1.25;
-    margin-top: 24px;
-    margin-bottom: 16px;
-    /* Darker */ }
 
   h4 {
+    font-size: 1em;
     font-weight: 600;
     line-height: 1.25;
   }
@@ -210,4 +208,12 @@ a:active{
 
   }
 
+  h1, h2, h3 {
+    padding-bottom: .3em;
+    color: #c9d1d9;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    /* Darker */ }
 

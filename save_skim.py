@@ -159,9 +159,10 @@ playerIDs   = []
 
 print("print 143")
 
-for playername, playerData in data["players"].items():
+for playerData in data["players"]:
     if playerData["team"] == 2:
         continue
+    playername = playerData["name"]
     print(f"print 146 {playername}")
     playerID = playerData["userid"]
     
