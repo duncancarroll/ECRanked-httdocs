@@ -278,8 +278,8 @@
       $total_deaths = $statData["total_deaths"];
       $average_speed = $statData["average_speed"];
       $average_ping = $statData["average_ping"];
-      $percent_stopped = $statData["percent_stopped"];
-      $percent_upsidedown = $statData["percent_upsidedown"];
+      $percent_stopped = $statData["percent_stopped"] * 100;
+      $percent_upsidedown = $statData["percent_upsidedown"] * 100;
       $deaths_per_game = $total_deaths /  $total_games;
 
 
