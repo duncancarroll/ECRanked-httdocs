@@ -17,10 +17,10 @@ while($row = $result->fetch_assoc()){
 }
 
 ?>
-<title>ECRanked</title>
+<title>User Not Found</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,7 +57,7 @@ while($row = $result->fetch_assoc()){
         href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
 
 
-      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="/home" class="w3-bar-item w3-button w3-padding-large">Home</a>
       <a href="https://echopedia.gg/wiki/Replay_Viewer#Installation"  target="_blank" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Replay Viewer</a>
       <a href="/home.json"
         class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">API</a>
@@ -74,12 +74,12 @@ while($row = $result->fetch_assoc()){
 
   <!-- Header -->
   <header class="w3-container w3-black w3-center" style="padding:100px 5px;background-image: url('/assets/combat_background.jpg'); background-size: cover;">
-    <h1 class="w3-margin w3-jumbo">ECRanked</h1>
+    <h1 class="w3-margin w3-jumbo">User Not Found</h1>
   </header>
 
   <div class="w3-container w3-dark-gray w3-center w3-padding-64">
     <div class="home-search round padded">
-      <h1>Find Your Stats!</h1>
+      <h1>Try again!</h1>
       <div class="round" style="width:100%">
         <form action="/user_search.php"  autocomplete="off">
           <div class="autocomplete" style="width:100%">
@@ -96,11 +96,8 @@ while($row = $result->fetch_assoc()){
   <div class="w3-row-padding w3-padding-64 w3-container w3-dark-gray ">
     <div class="w3-content ">
       <div class="w3-twothird round padded">
-        <h1>How it works</h1>
-        <h5 class="">ECRanked is a system that tracks, saves, and displays data gathered from games of Echo
-          Combat. Starting September 1st 2021 almost all games will be spectated and saved. The data that is saved is
-          publicly avalable data given to us via the Combat API. The data is only used to caculate intresting statistics
-          about players that would have been otherwise impossible to make</h5>
+        <h1>Disclaimer</h1>
+        <h5 class="">Stats have only been collected since september 2021. If you have played combat since than and still dont see yourself please contact BiffBish#0001 on discord</h5>
       </div>
     </div>
   </div>

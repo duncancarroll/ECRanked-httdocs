@@ -14,7 +14,7 @@
   $stmt->execute();
   $result = $stmt->get_result();
   if ($result->num_rows == 0) {
-    #header('Location: /home');
+    header('Location: /user/'.$username."/not_found");
     die();
   }
 
@@ -179,11 +179,10 @@
     <div class="w3-bar w3-dark-gray w3-card w3-left-align w3-large" style="height:51px;overflow:visible">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <!-- <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Home</a> -->
-      <a href="/home" class="w3-bar-item w3-button w3-padding-large round">Home</a>
-
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">About</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Takedown</a>
-      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray round">Contact</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="https://echopedia.gg/wiki/Replay_Viewer#Installation"  target="_blank" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">Replay Viewer</a>
+      <a href="/home.json"
+        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-gray">API</a>
       <div class="w3-bar-item-left" style="float:right;height:100%">
         <div class="round" style="width:80%">
           <form action="/user_search.php"  autocomplete="off">

@@ -26,6 +26,7 @@ RewriteRule ^replay/([^\/\.]*)$ replay_page.php?session_id=$1 [PT]
 RewriteRule ^replay/([^\/\.]*).json$ api/get_skim.php?session_id=$1 [PT]
 
 RewriteRule ^user/([^\/]*)/stats$ user_page.php?username=$1 [PT]
+RewriteRule ^user/([^\/]*)/not_found$ user_not_found.php?username=$1 [PT]
 RewriteRule ^user/([^\/]*)/stats.json /api/get_stats.py?username=$1 [PT]
 
 
