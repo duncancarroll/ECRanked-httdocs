@@ -34,7 +34,8 @@ RewriteRule ^user/([^\/]*)/stats.json /api/get_stats.py?username=$1 [PT]
 
 
 
-RewriteRule ^pubs$ api/pub_count.py [PT]
+# v1 API
+RewriteRule ^api/v1/user/@me$ api/v1/get_all_usernames.php
 
 AddHandler cgi-script .cgi .pl .asp .py .php
 
