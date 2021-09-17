@@ -13,5 +13,7 @@ $usernames = [];
 while($row = $result->fetch_assoc()){
   array_push($usernames, $row["oculus_name"]);
 }
+header('Content-Type: application/json; charset=utf-8');
+
 echo json_encode($usernames)
 ?>
