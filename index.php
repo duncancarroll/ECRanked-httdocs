@@ -229,7 +229,7 @@ while($row = $result->fetch_assoc()){
 
   </script>
 
-  <footer> v2.5.1 </footer>
+  <footer> v2.5.2 </footer>
 </body>
 
 </html>
