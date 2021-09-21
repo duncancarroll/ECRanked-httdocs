@@ -102,11 +102,11 @@ def GetUserData(_username):
     for (userData,) in cursor:
         userStatData["about_string"] = userData
 
-    query = "SELECT session_id,start_time FROM ecranked.skims WHERE `player_ids` LIKE CONCAT('%',%s,'%') ORDER BY `start_time` DESC LIMIT 10"
+    query = "SELECT session_id,start_time,map FROM ecranked.skims WHERE `player_ids` LIKE CONCAT('%',%s,'%') ORDER BY `start_time` DESC LIMIT 10"
     cursor.execute(query,(user,))
     userStatData["recent_games"] = []
-    for (session_id,start_time) in cursor:
-        userStatData["recent_games"].append({"session_id":session_id,"start_time":datetime.strftime(start_time,"%Y-%m-%d %H:%M:%S")})
+    for (session_id,start_time,map) in cursor:
+        userStatData["recent_games"].append({"session_id":session_id,"start_time":datetime.strftime(start_time,"%Y-%m-%d %H:%M:%S"),"map":map})
     return userStatData
 
 
