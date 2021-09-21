@@ -106,7 +106,7 @@ def GetUserData(_username):
     cursor.execute(query,(user,))
     userStatData["recent_games"] = []
     for (session_id,start_time) in cursor:
-        userStatData["recent_games"].append({"session_id":session_id,"start_time":datetime.strftime(start_time)})
+        userStatData["recent_games"].append({"session_id":session_id,"start_time":datetime.strftime(start_time,"%Y-%m-%d %H:%M:%S")})
     return userStatData
 
 
