@@ -20,10 +20,10 @@ config.read(f"{d}\config.ini")
 api_key = config.get('config','api_key')
 
 
-if "key" not in form or form["key"].value != api_key:
-    print("Content-Type: text/html\n\n")
-    print("Not authorized")
-    quit()
+# if "key" not in form or form["key"].value != api_key:
+#     print("Content-Type: text/html\n\n")
+#     print("Not authorized")
+#     quit()
 
 
 query = (
