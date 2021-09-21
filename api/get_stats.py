@@ -102,7 +102,11 @@ def GetUserData(_username):
     for (userData,) in cursor:
         userStatData["about_string"] = userData
 
-        #print(userStatData)
+    query = "SELECT session_id,start_time FROM ecranked.skims WHERE `player_ids` LIKE CONCAT('%',%s,'%') ORDER BY `start_time` DESC LIMIT 10"
+    cursor.execute(query,(_username,))
+    userStatData["recent_games"] = []
+    for (session_id,start_time) in cursor:
+        userStatData["recent_games"].append({"session_id":session_id,"start_time":start_time})
     return userStatData
 
 
@@ -169,7 +173,14 @@ try:
             returnData["discord_pfp"] = f"https://cdn.discordapp.com/avatars/{playerStatData['discord_id']}/{discord_data['avatar']}.png";
         except Exception as e:
             error = e
-        
+    
+    
+
+        #print(userStatData)
+
+    returnData["recent_games"] = playerStatData["recent_games"]
+
+
     returnDataStr =  json.dumps(returnData).replace(": None",": null")
     print(returnDataStr)
 except Exception as e:
