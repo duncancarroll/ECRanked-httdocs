@@ -32,6 +32,7 @@ RewriteRule ^user/([^\/]*)/stats$ user_page.php?username=$1 [PT]
 RewriteRule ^user/([^\/]*)/not_found$ user_not_found.php?username=$1 [PT]
 RewriteRule ^user/([^\/]*)/stats.json /api/get_stats.py?username=$1 [PT]
 
+RewriteRule ^pubs$ api/pub_count.py [PT]
 
 
 # v1 API
