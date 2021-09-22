@@ -68,12 +68,8 @@
   #echo (str_replace("Replays","Skims",$skimData["replay_link"]));
   
   $skim_str = file_get_contents($skim_link);
-
   header('Content-Type: application/json; charset=utf-8');
 
-
 ?>
-<title><?php echo(htmlspecialchars($session_id, ENT_QUOTES, 'UTF-8'))?></title>
-<meta charset="UTF-8">
 <?php echo($skim_str) ?>
 </html>
