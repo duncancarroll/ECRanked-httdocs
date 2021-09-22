@@ -69,6 +69,7 @@
   
   $skim_str = file_get_contents($skim_link);
 
+  header('Content-Type: application/json; charset=utf-8');
 
 
 ?>
