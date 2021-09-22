@@ -77,8 +77,7 @@
 <meta charset="UTF-8">
 
 
-<body>
-  <?php echo($skim_str) ?>
+<body><?php echo($skim_str) ?>
 </body>
 
 </html>
