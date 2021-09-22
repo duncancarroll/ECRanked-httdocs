@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-
-
   // Create connection
   $mysqli = new mysqli("localhost", "root", "", "ecranked");
   
