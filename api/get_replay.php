@@ -106,7 +106,7 @@ if($SecondCheck > 0){
 }
 
 
-header("Content-type:application/pdf");
+header("Content-type:application/echoreplay");
 header('Content-Disposition: attachment; filename=' . $_GET["session_id"].".echoreplay");
 readfile($fileurl);
 ?>
