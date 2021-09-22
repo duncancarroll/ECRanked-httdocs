@@ -8,28 +8,27 @@ Deny from all
 </IfModule>
 RewriteEngine On
 
-RedirectMatch "^/user$" "/"
-RedirectMatch "^/users$" "/"
+RedirectMatch "^/home$" "https://ecranked.com"
 RedirectMatch "^/$" "/home"
 
 
-RewriteRule ^about$ /about.html [PT]
+# RewriteRule ^about$ /about.html [PT]
 
-RewriteRule ^about$ /about.html [PT]
+# RewriteRule ^about$ /about.html [PT]
 
-RewriteRule ^home$ /index.php [PT]
-RewriteRule ^home.json$ /apidocs.php [PT]
+# RewriteRule ^home$ /index.php [PT]
+RewriteRule ^docs$ /apidocs.php [PT]
 
-RewriteRule ^takedown$ /takedown.html [PT]
-RewriteRule ^user/([^\/]*)$ user_page.php?username=$1 [PT]
+# RewriteRule ^takedown$ /takedown.html [PT]
+# RewriteRule ^user/([^\/]*)$ user_page.php?username=$1 [PT]
 
 RewriteRule ^replay/([^\/]*)/download$ api/get_replay.php?session_id=$1 [PT]
 RewriteRule ^replay/([^\/]*)/trydownload$ api/get_replay.php?session_id=$1&test=true [PT]
-RewriteRule ^replay/([^\/\.]*)$ replay_page.php?session_id=$1 [PT]
+# RewriteRule ^replay/([^\/\.]*)$ replay_page.php?session_id=$1 [PT]
 RewriteRule ^replay/([^\/\.]*).json$ api/get_skim.php?session_id=$1 [PT]
 
-RewriteRule ^user/([^\/]*)/stats$ user_page.php?username=$1 [PT]
-RewriteRule ^user/([^\/]*)/not_found$ user_not_found.php?username=$1 [PT]
+# RewriteRule ^user/([^\/]*)/stats$ user_page.php?username=$1 [PT]
+# RewriteRule ^user/([^\/]*)/not_found$ user_not_found.php?username=$1 [PT]
 RewriteRule ^user/([^\/]*)/stats.json /api/get_stats.py?username=$1 [PT]
 
 RewriteRule ^pubs$ api/pub_count.py [PT]
