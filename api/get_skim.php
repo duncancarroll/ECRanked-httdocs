@@ -68,4 +68,3 @@
 
 ?>
 <?php echo($skim_str) ?>
-</html>
