@@ -38,15 +38,7 @@
     return $out;
   }
   
-  $ip = $_SERVER['REMOTE_ADDR'];
-  if($ip == "::1" or $ip == "192.168.1.1"){
-    $timezone = "BST";
-  } else{
-    $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
-    $ipInfo = json_decode($ipInfo);
-    $timezone = $ipInfo->timezone;
-
-  }
+  
   $result = mysqli_query($mysqli, "SELECT `oculus_name` FROM `ecranked`.`users`");
   
   $usernames = [];
