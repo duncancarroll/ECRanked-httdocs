@@ -45,17 +45,24 @@ def GetUserData(userID,userName):
     UserKeys = [
         "oculus_id",
         "total_deaths",
+
         "total_ping",
         "frames_ping",
+
         "total_games_combustion",
         "total_games_dyson",
         "total_games_fission",
         "total_games_surge",
+
         "total_upsidedown",
         "frames_upsidedown",
+        
         "total_stopped",
         "frames_stopped",
+
         "total_speed",
+        "total_crashes",
+
         "frames_speed",
         "frames_loadout",
         "loadout",
@@ -81,8 +88,10 @@ def SaveStatData(userID,StatData):
     UserKeys = [
         "oculus_id",
         "total_deaths",
+        
         "total_ping",
         "frames_ping",
+
         "total_games_combustion",
         "total_games_dyson",
         "total_games_fission",
@@ -98,6 +107,7 @@ def SaveStatData(userID,StatData):
         "total_speed",
         "frames_speed",
 
+        "total_crashes",
         "frames_loadout",
     ]
 
@@ -185,6 +195,7 @@ for playerData in data["players"]:
     playerStatData["total_speed"] += SkimStatPlayerData["total_speed"]
     playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
     playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
+    playerStatData["total_crashes"] += 1 if SkimStatPlayerData["crashed"] else 0
 
 
     playerStatData["frames_loadout"] += SkimStatPlayerData["frames_loadout"]
