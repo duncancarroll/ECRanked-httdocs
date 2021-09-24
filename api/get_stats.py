@@ -60,6 +60,7 @@ def GetUserData(_username):
         "total_stopped",
         "frames_stopped",
         "total_speed",
+        "total_crashes",
         "frames_speed",
         "frames_loadout",
         "loadout",
@@ -139,6 +140,8 @@ try:
     returnData["total_games"]        = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
     returnData["total_deaths"]       = playerStatData["total_deaths"]
     returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
+    returnData["percent_crash"]     = round(playerStatData["total_crashes"] / returnData["total_games"],4)
+
     returnData["discord_name"] = None
     returnData["discord_pfp"] = None
     returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
