@@ -88,7 +88,7 @@ def SaveStatData(userID,StatData):
     UserKeys = [
         "oculus_id",
         "total_deaths",
-        
+
         "total_ping",
         "frames_ping",
 
@@ -195,8 +195,7 @@ for playerData in data["players"]:
     playerStatData["total_speed"] += SkimStatPlayerData["total_speed"]
     playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
     playerStatData["frames_speed"] += SkimStatPlayerData["frames_speed"]
-    playerStatData["total_crashes"] += 1 if SkimStatPlayerData["crashed"] else 0
-
+    playerStatData["total_crashes"] += 1 if playerData["crashed"] else 0
 
     playerStatData["frames_loadout"] += SkimStatPlayerData["frames_loadout"]
     savedLoadoutData = json.loads(playerStatData["loadout"])
@@ -244,7 +243,11 @@ query = ("INSERT INTO `ecranked`.`skims`"
     "(`session_id`, `start_time`, `frames`, `map`, `player_ids`, `replay_link`, `skim_link`)"
     " VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-cursor.execute(query,(sessionID,startTime,totalFrames,mapName,playerIDsStr,replayLink,skimLink))
+print(query)
+try:
+    cursor.execute(query,(sessionID,startTime,totalFrames,mapName,playerIDsStr,replayLink,skimLink))
+except Exception as e:
+    print(traceback.format_exc())
 print("finished")
 cnx.commit()
 cursor.close()
