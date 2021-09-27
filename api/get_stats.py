@@ -36,6 +36,7 @@ cnx = mysql.connector.connect(user='root', password='',
 cursor = cnx.cursor(buffered=True)
 
 
+
 def GetUserData(_username):
     query = "SELECT oculus_id FROM `ecranked`.`users` WHERE oculus_name=%s"
     cursor.execute(query,(_username,))
@@ -112,11 +113,6 @@ def GetUserData(_username):
 
 
 
-def divideCatch(first,second,catch):
-    if second == 0:
-        return catch
-    return first/second
-
 
 playerIDs   = []
 
@@ -131,6 +127,11 @@ if playerStatData is None:
 
 print("Content-Type: application/json;charset=utf-8\n")
 try:
+    def divideCatch(first,second,catch):
+        if second == 0 or second == None:
+            return catch
+        return first/second
+
     #print("Status: 404 Not Found")
     returnData = dict()
     #print(playerStatData)
