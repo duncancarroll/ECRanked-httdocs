@@ -36,8 +36,13 @@ RewriteRule ^pubs$ api/pub_count.py [PT]
 
 # v1 API
 RewriteRule ^api/v1/user/@all$ api/v1/get_all_usernames.php
+
+
 RewriteRule ^api/v1/replay/@all$ api/v1/get_all_replays.php
 RewriteRule ^api/v1/replay/@recent$ api/v1/get_recent_replays.php
+RewriteRule ^api/v1/replay/([^\/\.]*)$ api/get_skim.php?session_id=$1 [PT]
+
+RewriteRule ^api/v1/user/([^\/\.]*)$ /api/get_stats.py?username=$1 [PT]
 
 AddHandler cgi-script .cgi .pl .asp .py .php
 

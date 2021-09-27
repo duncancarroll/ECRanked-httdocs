@@ -75,6 +75,19 @@
       0.0
     ]
   ]
+  <a href="#recent_games">"recent_games"</a>: [
+    {
+      "session_id": "8ACE03FD-5B86-436B-8B71-1058CA3795A9",
+      "start_time": 1632701962,
+      "map": "combustion"
+    },
+    {
+      "session_id": "3B43B933-938B-4BE1-940D-B8FD38A0130C",
+      "start_time": 1632701308,
+      "map": "fission"
+    },
+    [8 more...]
+  ]
 }
 </pre>
 <h4>
@@ -157,7 +170,37 @@
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>top_loadout.[1]</code>
 </h4>
 <p>The percentage of time it has been used.</p>
+<h4>
+	<a id="top_loadout1" class="anchor" href="#top_loadout1"
+		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>recent_games[]</code>
+</h4>
+<p>The 10 most recent match's the user has played.</p>
 <h3>
+<a id="top_loadout1" class="anchor" href="#top_loadout1"
+		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>recent_games[].session_id</code>
+</h4>
+<p>The session id of the match.</p>
+<h3>
+<a id="top_loadout1" class="anchor" href="#top_loadout1"
+		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>recent_games[].start_time</code>
+</h4>
+<p>The start time of the match in unix seconds.</p>
+<h3>
+<a id="top_loadout1" class="anchor" href="#top_loadout1"
+		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>recent_games[].map</code>
+</h4>
+<p>The map of the match.</p>
+<ul>
+	<li>combustion</li>
+	<li>dyson</li>
+
+	<li>fission</li>
+
+	<li>surge</li>
+
+</ul>
+<h3>
+
 	<a id="get-replay" class="anchor" href="#get-replay"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GET /replay</h3>
 <h4>
