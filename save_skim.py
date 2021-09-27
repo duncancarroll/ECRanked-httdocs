@@ -157,7 +157,6 @@ print("print 132")
 
 
 startTime   =  data["start_time"]
-FormatedStartTime = datetime.strftime(startTime,"%Y-%m-%d %H-%M-%S")
 print("print 136")
 
 totalFrames = data["frames"]
