@@ -112,7 +112,10 @@ def GetUserData(_username):
 
 
 
-
+def divideCatch(first,second,catch):
+    if second == 0:
+        return catch
+    return first/second
 
 
 playerIDs   = []
@@ -133,18 +136,18 @@ try:
     #print(playerStatData)
     returnData["about_string"] = playerStatData["about_string"]
 
-    returnData["average_speed"]      = round(playerStatData["total_speed"]/playerStatData["frames_speed"],4)
-    returnData["average_ping"]       = round(playerStatData["total_ping"]/playerStatData["frames_ping"],3)
-    returnData["percent_stopped"]    = round(playerStatData["total_stopped"]/playerStatData["frames_stopped"],6)
-    returnData["percent_upsidedown"] = round(playerStatData["total_upsidedown"]/playerStatData["frames_upsidedown"],6)
+    returnData["average_speed"]      = round(divideCatch(playerStatData["total_speed"],playerStatData["frames_speed"],0),4)
+    returnData["average_ping"]       = round(divideCatch(playerStatData["total_ping"],playerStatData["frames_ping"],0),3)
+    returnData["percent_stopped"]    = round(divideCatch(playerStatData["total_stopped"],playerStatData["frames_stopped"],0),6)
+    returnData["percent_upsidedown"] = round(divideCatch(playerStatData["total_upsidedown"],playerStatData["frames_upsidedown"],0),6)
     returnData["total_games"]        = playerStatData["total_games_combustion"]+playerStatData["total_games_dyson"]+playerStatData["total_games_fission"]+playerStatData["total_games_surge"]
     returnData["total_deaths"]       = playerStatData["total_deaths"]
-    returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
-    returnData["percent_crash"]     = round(playerStatData["total_crashes"] / returnData["total_games"],4)
+    returnData["average_deaths"]     = round(divideCatch(playerStatData["total_deaths"] , returnData["total_games"],0),4)
+    returnData["percent_crash"]     = round(divideCatch(playerStatData["total_crashes"] , returnData["total_games"],0),4)
 
     returnData["discord_name"] = None
     returnData["discord_pfp"] = None
-    returnData["average_deaths"]     = round(playerStatData["total_deaths"] / returnData["total_games"],4)
+    returnData["average_deaths"]     = round(divideCatch(playerStatData["total_deaths"] , returnData["total_games"],0),4)
 
     loadoutData = json.loads(playerStatData["loadout"])
     returnLoadout = dict()
@@ -153,7 +156,7 @@ try:
     if playerStatData["frames_loadout"] != 0:
        
         for key, value in loadoutData.items():
-            returnLoadout[key] = round(value/framesLoadout,6)
+            returnLoadout[key] = round(divideCatch(value,framesLoadout,0),6)
 
         topLoadout = sorted(returnLoadout.items(), key=lambda item: item[1],reverse=True)
         returnData["loadout"] = returnLoadout
