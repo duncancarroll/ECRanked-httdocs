@@ -20,19 +20,18 @@
 <h2>
 	<a id="summary" class="anchor" href="#summary"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h2>
-<p>Echo Combat Stats (ECStats) has a public API available from their website. If a user query is
-	<code>http://ecranked.ddns.net/user/Timemaster111/stats</code> then the API query is
-	<code>http://ecranked.ddns.net/user/Timemaster111/stats.json</code>.</p>
-<p>Similarly, a game/replay query is <code>http://ecranked.ddns.net/replay/5D833913-11FA-4A1E-8E33-4CB9A173C201</code>
-	and the API is from <code>http://ecranked.ddns.net/replay/5D833913-11FA-4A1E-8E33-4CB9A173C201.json</code>.</p>
+<p>Echo Combat Stats (ECStats) has a public API available from their API Endpoint. A user query is 
+	<code>http://ecranked.ddns.net/api/v1/user/Timemaster111</code> .</p>
+<p>Similarly, a game/replay query is <code>http://ecranked.ddns.net/api/v1/replay/5D833913-11FA-4A1E-8E33-4CB9A173C201</code>.</p>
 <h2>
 	<a id="api-endpoints" class="anchor" href="#api-endpoints"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Endpoints</h2>
-<p>The endpoints mirror the website, so the user endpoints are <code>/user/&lt;USER&gt;/stats.json</code> and the
-	game/replay enpoints are <code>/replay/&lt;REPLAY-ID&gt;.json</code>.</p>
+<!-- <p>The endpoints mirror the website, so the user endpoints are <code>/user/&lt;USER&gt;/stats.json</code> and the
+	game/replay enpoints are <code>/replay/&lt;REPLAY-ID&gt;.json</code>.</p> -->
 <h3>
 	<a id="get-user" class="anchor" href="#get-user"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GET /user</h3>
+		<code>http://ecranked.ddns.net/api/v1/user/:username</code>
 <h4>
 	<a id="example-response" class="anchor" href="#example-response"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Response</h4>
@@ -203,6 +202,7 @@
 
 	<a id="get-replay" class="anchor" href="#get-replay"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GET /replay</h3>
+		<code>http://ecranked.ddns.net/api/v1/replay/:sessionID</code>
 <h4>
 	<a id="example-response-1" class="anchor" href="#example-response-1"
 		aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Response</h4>
